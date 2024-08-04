@@ -1,26 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div :style="backGroundStyle">
+    <MainPage />
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+  import MainPage from "./pages/MainPage.vue"
+  import { ref, onMounted, computed } from "vue"
+  let backGroundColor = ref(255)
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  const backGroundStyle = computed(() => {
+    return {
+      backgroundColor: `rgb(${backGroundColor.value},${backGroundColor.value},${backGroundColor.value})`,
+    }
+  })
+
+  const changeBackGroundColor = () => {
+    const interval = setInterval(() => {
+      if (backGroundColor.value > 128) {
+        backGroundColor.value -= 1
+      } else {
+        clearInterval(interval)
+      }
+    }, 10)
   }
-}
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  onMounted(() => {
+    changeBackGroundColor()
+  })
+</script>
