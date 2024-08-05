@@ -48,7 +48,7 @@
     margin: 0 auto;
   }
   .profile-header {
-    margin-top: 40px;
+    margin-top: 70px;
     text-align: center;
   }
   .profile-details-contents {
